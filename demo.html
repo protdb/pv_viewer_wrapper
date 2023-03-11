@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  <script src="bio-pv.js"></script>
+  <script src="pv_wrapper.js"></script>
+</head>
+<body>
+<div id="pv_container"></div>
+</body>
+<script>
+  async function loadViewer() {
+    prms = await fetch("examples/test_pair.json")
+    data = await prms.json()
+    console.log(data)
+    await createWrapper(
+            document.getElementById("pv_container"),
+            800,
+            800,
+            data,
+            {
+              "toggle_source": "Toggle source",
+              "toggle_result": "Toggle result"
+            }
+    )
+  }
+  loadViewer()
+</script>
+</html>

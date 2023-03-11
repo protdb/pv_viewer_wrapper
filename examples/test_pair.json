@@ -1,0 +1,14 @@
+{
+  "structures": [
+    {
+      "name": "reference",
+      "url": "examples/2KO3_A.pdb",
+      "stride": "CEEEEETTTTCEEEEECTTTTBHHHHHHHHHHHHCCCGGGCEEEETTEECTTTTBGGGGCCTTTTEEEEEECCCCC"
+    },
+    {
+      "name": "result",
+      "url": "examples/2C9W_B2_B77.pdb",
+      "stride": "CEEEEEEETTEEEEEEETTTTBHHHHHHHHHHHHCCCGGGEEEEETTEEETTTTBGGGGCCTTTTTBTTBTEEEEE"
+    }
+  ]
+}
