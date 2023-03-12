@@ -8,11 +8,13 @@ async function load_struct(viewer, name, url, stride, color) {
     let source = await fetch(url)
     source = await source.text()
     let struct = pv.io.pdb(source)
-    struct.eachResidue(function (res) {
-        res.setSS(
-            (['G', 'T', 'B'].includes(stride[res.index()]) ? 'C' : stride[res.index()])
-        )
-    })
+    if (stride.length !== 0) {
+        struct.eachResidue(function (res) {
+            res.setSS(
+                (['G', 'T', 'B'].includes(stride[res.index()]) ? 'C' : stride[res.index()])
+            )
+        })
+    }
     return viewer.cartoon(name, struct, {
         color: pv.color.uniform(color),
         arcDetail: 50,
@@ -44,8 +46,6 @@ function get_struct_toggler(wrapper, name) {
 async function createWrapper(root_elem, stage_width, stage_height, parameters, controls_translations) {
     let stage = document.createElement('div')
     stage.setAttribute('class', 'ngl_stage')
-    stage.style.width = `${stage_width}px`
-    stage.style.height = `${stage_height}px`
     root_elem.appendChild(stage)
     let controls = document.createElement('div')
     controls.setAttribute('class', 'ngl_controls')
@@ -60,8 +60,8 @@ async function createWrapper(root_elem, stage_width, stage_height, parameters, c
     wrapper.viewer = pv.Viewer(
         stage,
         {
-            width: 800,
-            height: 800,
+            width: stage_width,
+            height: stage_height,
             antialias: true,
             outline: false,
             quality : 'high',
