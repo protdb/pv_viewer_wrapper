@@ -15,13 +15,14 @@ async function load_struct(viewer, name, url, stride, color) {
             )
         })
     }
-    return viewer.cartoon(name, struct, {
+    viewer.cartoon(name, struct, {
         color: pv.color.uniform(color),
         arcDetail: 50,
         splineDetail: 20,
         radius: 0.2,
         strength: 1.0
     })
+    return struct
 }
 
 function get_struct_toggler(wrapper, name) {
@@ -44,6 +45,10 @@ function get_struct_toggler(wrapper, name) {
 }
 
 async function createWrapper(root_elem, stage_width, stage_height, parameters, controls_translations) {
+    // cleaning stage
+    while (root_elem.firstChild) {
+        root_elem.removeChild(root_elem.lastChild)
+    }
     let stage = document.createElement('div')
     stage.setAttribute('class', 'ngl_stage')
     root_elem.appendChild(stage)
@@ -60,14 +65,14 @@ async function createWrapper(root_elem, stage_width, stage_height, parameters, c
     wrapper.viewer = pv.Viewer(
         stage,
         {
-            width: stage_width,
-            height: stage_height,
+            width: Math.max(root_elem.clientWidth, 400),
+            height: Math.max(root_elem.clientHeight, 400),
             antialias: true,
             outline: false,
             quality : 'high',
             fog: false
         }
-        )
+    )
     for (let [idx, struct] of wrapper.structures.entries()) {
         let mol = await load_struct(
             wrapper.viewer,
@@ -78,7 +83,8 @@ async function createWrapper(root_elem, stage_width, stage_height, parameters, c
         )
         wrapper.mols.push(mol)
     }
-    wrapper.viewer.autoZoom()
+    // wrapper.viewer.autoZoom()
+    wrapper.viewer.fitTo(wrapper.mols[0])
     if (wrapper.structures.length > 1) {
         wrapper.states = {}
         for (struct of wrapper.structures) {
@@ -90,6 +96,5 @@ async function createWrapper(root_elem, stage_width, stage_height, parameters, c
             controls.appendChild(buttn)
         }
     }
-    //wrapper.viewer.centerOn(wrapper.mols[0])
     loader.style.display = 'none'
 }

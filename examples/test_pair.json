@@ -1,14 +1,9 @@
 {
   "structures": [
     {
-      "name": "reference",
-      "url": "examples/2KO3_A.pdb",
-      "stride": "CEEEEETTTTCEEEEECTTTTBHHHHHHHHHHHHCCCGGGCEEEETTEECTTTTBGGGGCCTTTTEEEEEECCCCC"
-    },
-    {
-      "name": "result",
-      "url": "examples/2C9W_B2_B77.pdb",
-      "stride": "CEEEEEEETTEEEEEEETTTTBHHHHHHHHHHHHCCCGGGEEEEETTEEETTTTBGGGGCCTTTTTBTTBTEEEEE"
+      "name": "structure",
+      "url": "http://localhost:5001/storage/pdb/fragment/0/1EDI_A.pdb",
+      "stride": "CCCCHHHHHHHHHHHCTTTTCHHHHHHHHHHHHHCGGGHHHHHHHHHHHHHHHCCC"
     }
   ]
 }
